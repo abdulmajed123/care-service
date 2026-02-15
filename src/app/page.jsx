@@ -1,12 +1,13 @@
 import About from "@/Component/Home/About";
 import Banner from "@/Component/Home/Banner";
-import Image from "next/image";
+import Testimonials from "@/Component/Home/Testimonials";
 
 export default function Home() {
   return (
     <div>
       <Banner></Banner>
       <About></About>
+      <Testimonials></Testimonials>
     </div>
   );
 }

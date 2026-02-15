@@ -18,8 +18,8 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <Link className={navLinkClass("/services")} href="/services">
-          Services
+        <Link className={navLinkClass("/services")} href="/service">
+          All Services
         </Link>
       </li>
       <li>

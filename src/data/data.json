@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Baby Care",
+    "description": "Trusted caregivers to look after your children with love and attention.",
+    "image": "https://images.pexels.com/photos/3662664/pexels-photo-3662664.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "link": "/services/baby",
+    "serviceCharge": 500,
+    "subServices": [
+      "Feeding & Bottle Preparation",
+      "Diaper Change & Hygiene",
+      "Playtime & Learning Activities",
+      "Storytelling & Bedtime Care"
+    ],
+    "durationOptions": ["1 hour", "2 hours", "Half Day", "Full Day"],
+    "ratings": 4.8
+  },
+  {
+    "id": 2,
+    "name": "Elderly Care",
+    "description": "Compassionate support for senior family members including companionship, medication assistance.",
+    "image": "https://images.pexels.com/photos/3396201/pexels-photo-3396201.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "link": "/services/elderly",
+    "serviceCharge": 600,
+    "subServices": [
+      "Assistance with Daily Activities",
+      "Medication Reminders",
+      "Companionship & Emotional Support",
+      "Meal Preparation & Mobility Assistance"
+    ],
+    "durationOptions": ["1 hour", "2 hours", "Half Day", "Full Day"],
+    "ratings": 4.9
+  },
+  {
+    "id": 3,
+    "name": "Sick People Service",
+    "description": "Professional care for patients at home, including monitoring health, assisting with medications.",
+    "image": "https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "link": "/services/sick",
+    "serviceCharge": 700,
+    "subServices": [
+      "Medication Administration",
+      "Monitoring Vital Signs",
+      "Mobility Assistance",
+      "Health Education & Support"
+    ],
+    "durationOptions": ["1 hour", "2 hours", "Half Day", "Full Day"],
+    "ratings": 4.7
+  }
+]

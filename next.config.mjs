@@ -1,9 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   images: {
-    domains: ["thumbs.dreamstime.com"], // external image domain
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
+      {
+        protocol: "https",
+        hostname: "thumbs.dreamstime.com", // New domain added
+      },
+    ],
   },
+  /* config options here */
+  reactCompiler: true,
 };
 
 export default nextConfig;
