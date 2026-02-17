@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import AuthButton from "../Button/AuthButton";
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
   const navLinkClass = (path) =>
     pathname === path ? "text-primary font-semibold" : "hover:text-primary";
@@ -70,15 +70,7 @@ const Navbar = () => {
 
       {/* Right */}
       <div className="navbar-end gap-2">
-        {isLoggedIn ? (
-          <button onClick={handleLogout} className="btn btn-error btn-sm">
-            Logout
-          </button>
-        ) : (
-          <Link href="/login" className="btn btn-primary btn-sm">
-            Login
-          </Link>
-        )}
+        <AuthButton></AuthButton>
       </div>
     </div>
   );

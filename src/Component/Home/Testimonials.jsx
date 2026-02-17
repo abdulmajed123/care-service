@@ -27,7 +27,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-base-100 py-16">
+    <section className="bg-base-200 py-16">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           What People Say About Service Care
@@ -37,7 +37,7 @@ export default function Testimonials() {
           {testimonials.map((t, i) => (
             <div
               key={i}
-              className="bg-base-200 p-6 rounded-2xl shadow hover:shadow-lg transition"
+              className="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 relative rounded-full overflow-hidden">

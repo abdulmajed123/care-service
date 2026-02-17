@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 
-export default function BookingButton() {
+export default function BookingButton({ id }) {
   return (
-    <Link href={"/bookingpage"} className="btn btn-primary w-full">
+    <Link href={`/bookingpage/${id}`} className="btn btn-primary w-full">
       Book This Service
     </Link>
   );

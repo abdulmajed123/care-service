@@ -4,8 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { SocialButtons } from "./SocialButton";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { signIn } from "next-auth/react";
-import Swal from "sweetalert2";
 import { postUser } from "@/app/action/server/auth";
 
 export const RegisterForm = () => {

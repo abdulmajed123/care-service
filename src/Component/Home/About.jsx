@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function About() {
   return (
-    <section className="bg-base-100">
+    <section className="bg-base-200">
       <div className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-center">
         {/* Image / Visual */}
         <div className="relative w-full h-72 md:h-96 rounded-3xl overflow-hidden shadow-lg">
@@ -34,7 +34,7 @@ export default function About() {
             location.
           </p>
 
-          <Link href="/services" className="btn btn-primary">
+          <Link href="/service" className="btn btn-primary">
             Explore Services
           </Link>
         </div>

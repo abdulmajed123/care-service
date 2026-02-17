@@ -20,6 +20,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form submitted:", form);
     setLoading(true);
 
     const result = await signIn("credentials", {

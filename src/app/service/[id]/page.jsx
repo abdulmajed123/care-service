@@ -63,7 +63,7 @@ export default async function ServiceDetails({ params }) {
 
           {/* Booking Button */}
           <div className="mt-6">
-            <BookingButton />
+            <BookingButton id={service.id} />
           </div>
         </div>
       </div>
