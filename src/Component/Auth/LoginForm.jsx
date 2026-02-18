@@ -3,11 +3,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Swal from "sweetalert2";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { SocialButtons } from "./SocialButton";
 
 const LoginForm = () => {
   const router = useRouter();
+  const params = useSearchParams();
+  const callBackUrl = params.get("callbackUrl") || "/";
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -33,7 +36,8 @@ const LoginForm = () => {
       Swal.fire("Error", "Email or Password not matched", "error");
     } else {
       Swal.fire("Success", "Welcome to Smart Items", "success");
-      router.push("/");
+      router.push(callBackUrl);
+      router.refresh();
     }
 
     setLoading(false);
@@ -93,12 +97,14 @@ const LoginForm = () => {
             </button>
           </form>
           {/* Social Login */}
-          <div className="mt-4">{/* <SocialButtons /> */}</div>
+          <div className="mt-4">
+            <SocialButtons />
+          </div>
 
           {/* Register Link */}
           <p className="text-center text-sm mt-4">
             Don’t have an account?{" "}
-            <Link href="/register" className="link link-primary font-medium">
+            <Link href={"/register"} className="link link-primary font-medium">
               Register
             </Link>
           </p>

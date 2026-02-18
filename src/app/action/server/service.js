@@ -6,7 +6,7 @@ export const getServices = async () => {
   const services = await dbConnect(collection.Services).find().toArray();
   return services.map((service) => ({
     ...service,
-    _id: service._id.toString(), // ⭐ IMPORTANT
+    _id: service._id.toString(),
   }));
 };
 

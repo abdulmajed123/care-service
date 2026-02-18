@@ -1,14 +1,15 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 export const SocialButtons = () => {
-  const router = useRouter();
+  const params = useSearchParams();
   const handleSignIn = async () => {
     const result = await signIn("google", {
-      callbackUrl: "/allProducts",
+      redirect: false,
+      callbackUrl: params.get("callbackUrl") || "/",
     });
     console.log(result);
 

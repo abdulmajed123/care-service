@@ -1,43 +1,17 @@
-// import { LoginUser } from "@/app/action/server/auth";
-// import CredentialsProvider from "next-auth/providers/credentials";
-// export const authOptions = {
-//   // Configure one or more authentication providers
-//   providers: [
-//     CredentialsProvider({
-//       name: "Credentials",
-//       credentials: {
-//         // username: { label: "Username", type: "text", placeholder: "jsmith" },
-//         // password: { label: "Password", type: "password" },
-//       },
-//       async authorize(credentials, req) {
-//         const user = await LoginUser(credentials);
-//         if (user) {
-//           return {
-//             _id: user._id.toString(),
-//             name: user.name,
-//             email: user.email,
-//           };
-//         }
-//         return null;
-//       },
-//     }),
-//     // ...add more providers here
-//   ],
-// };
-
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
 import { LoginUser } from "@/app/action/server/auth";
-
+import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import { collection, dbConnect } from "./dbConnect";
 export const authOptions = {
+  // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
+        // username: { label: "Username", type: "text", placeholder: "jsmith" },
+        // password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         const user = await LoginUser(credentials);
         if (user) {
           return {
@@ -49,12 +23,43 @@ export const authOptions = {
         return null;
       },
     }),
-  ],
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
 
-  session: {
-    strategy: "database", // cookie-based session
+    // ...add more providers here
+  ],
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log({ user, account, profile, email, credentials });
+      const isExist = await dbConnect(collection.Users).findOne({
+        email: user.email,
+        providerId: account?.provider,
+      });
+      if (isExist) {
+        return true;
+      }
+      const newUser = {
+        providerId: account?.provider || "credentials",
+        name: user.name,
+        email: user.email,
+        image: user.image,
+        // password: await bcrypt.hash(credentials.password, 14),
+        role: "user",
+      };
+
+      const result = await dbConnect(collection.Users).insertOne(newUser);
+      return result.acknowledged;
+    },
+    // async redirect({ url, baseUrl }) {
+    //   return baseUrl;
+    // },
+    // async session({ session, token, user }) {
+    //   return session;
+    // },
+    // async jwt({ token, user, account, profile, isNewUser }) {
+    //   return token;
+    // },
   },
 };
-
-const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST };
