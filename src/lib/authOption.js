@@ -30,36 +30,86 @@ export const authOptions = {
 
     // ...add more providers here
   ],
+  // callbacks: {
+  //   async signIn({ user, account, profile, email, credentials }) {
+  //     console.log({ user, account, profile, email, credentials });
+  //     const isExist = await dbConnect(collection.Users).findOne({
+  //       email: user.email,
+  //       providerId: account?.provider,
+  //     });
+  //     if (isExist) {
+  //       return true;
+  //     }
+  //     const newUser = {
+  //       providerId: account?.provider || "credentials",
+  //       name: user.name,
+  //       email: user.email,
+  //       image: user.image,
+  //       // password: await bcrypt.hash(credentials.password, 14),
+  //       role: "user",
+  //     };
+
+  //     const result = await dbConnect(collection.Users).insertOne(newUser);
+  //     return result.acknowledged;
+  //   },
+  //   // async redirect({ url, baseUrl }) {
+  //   //   return baseUrl;
+  //   // },
+  //   async session({ session, token, user }) {
+  //     if (token) {
+  //       if (account.provider === "google") {
+  //         const dbUser = await dbConnect(collection.Users).findOne({
+  //           email: token.email,
+  //         });
+  //         session.role = dbUser?.role;
+  //         session.email = dbUser?.email;
+  //       }
+  //       session.role = token?.role;
+  //       session.email = token?.email;
+  //     }
+  //     return session;
+  //   },
+  //   async jwt({ token, user, account, profile, isNewUser }) {
+  //     if (user) {
+  //       token.role = user?.role;
+  //       token.email = user?.email;
+  //     }
+  //     return token;
+  //   },
+  // },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      console.log({ user, account, profile, email, credentials });
       const isExist = await dbConnect(collection.Users).findOne({
         email: user.email,
         providerId: account?.provider,
       });
-      if (isExist) {
-        return true;
-      }
+
+      if (isExist) return true;
+
       const newUser = {
         providerId: account?.provider || "credentials",
         name: user.name,
         email: user.email,
         image: user.image,
-        // password: await bcrypt.hash(credentials.password, 14),
         role: "user",
       };
 
       const result = await dbConnect(collection.Users).insertOne(newUser);
       return result.acknowledged;
     },
-    // async redirect({ url, baseUrl }) {
-    //   return baseUrl;
-    // },
-    // async session({ session, token, user }) {
-    //   return session;
-    // },
-    // async jwt({ token, user, account, profile, isNewUser }) {
-    //   return token;
-    // },
+
+    async jwt({ token, user }) {
+      if (user) {
+        token.email = user.email;
+        token.role = user.role || "user";
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      session.user.email = token.email;
+      session.user.role = token.role;
+      return session;
+    },
   },
 };

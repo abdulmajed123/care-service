@@ -1,12 +1,11 @@
+import { Suspense } from "react";
+import LoginForm from "@/Component/Auth/LoginForm";
 import { RegisterForm } from "@/Component/Auth/RegisterForm";
-import React from "react";
 
-const RegisterPage = () => {
+export default function LoginPage() {
   return (
-    <div>
+    <Suspense fallback={<div>Loading...</div>}>
       <RegisterForm></RegisterForm>
-    </div>
+    </Suspense>
   );
-};
-
-export default RegisterPage;
+}
